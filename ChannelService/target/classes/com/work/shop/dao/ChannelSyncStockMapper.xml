@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.work.shop.dao.ChannelSyncStockMapper">
+  <resultMap id="TicketInfoVoMap" type="com.work.shop.vo.TicketInfoVo">
+    <id column="Id" jdbcType="INTEGER" property="id" />
+    <result column="ticket_code" jdbcType="VARCHAR" property="ticketCode" />
+    <result column="goods_sn" jdbcType="VARCHAR" property="goodsSn" />
+    <result column="channel_goodssn" jdbcType="VARCHAR" property="channelGoodssn" />
+    <result column="goods_title" jdbcType="VARCHAR" property="goodsTitle" />
+    <result column="channel_code" property="channelCode" jdbcType="VARCHAR" />
+    <result column="shop_code" property="shopCode" jdbcType="VARCHAR" />
+    <result column="ticket_type" property="ticketType" jdbcType="TINYINT" />
+    <result column="on_sell_status" property="onSellStatus" jdbcType="VARCHAR" />
+    <result column="safe_price" jdbcType="DECIMAL" property="safePrice" />
+    <result column="new_price" jdbcType="DECIMAL" property="newPrice" />
+    <result column="selling_info" jdbcType="VARCHAR" property="sellingInfo" />
+    <result column="has_discount" jdbcType="VARCHAR" property="hasDiscount" />
+    <result column="freight_payer" jdbcType="VARCHAR" property="freightPayer" />
+    <result column="return_Message" jdbcType="VARCHAR" property="returnMessage" />
+    <result column="request_time" jdbcType="TIMESTAMP" property="requestTime" />
+    <result column="custum_code" jdbcType="VARCHAR" property="sku" />
+    <result column="available_number" jdbcType="VARCHAR" property="channelStock" />
+  </resultMap>
+  <select id="selectChannelStockResult" parameterType="hashmap" resultMap="TicketInfoVoMap">
+  		SELECT p.custum_code,v.available_number
+		  from product_barcode_list p,channel_vdepot_inventory v
+ 		 WHERE p.goods_sn = v.goods_sn and p.color_code = v.color_code 
+ 		   and p.size_code = v.size_code 
+ 		   AND v.vdepot_code = #{vdepotCode, jdbcType=VARCHAR}
+ 		   and p.goods_sn IN 
+ 		<foreach collection="array" index="index" item="item" open="(" separator="," close=")">
+			#{item, jdbcType=VARCHAR}
+		</foreach>
+  </select>
+</mapper>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE generatorConfiguration  
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"  
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+	<classPathEntry
+			location="G:/Java/apache-maven-3.0.3/mavenlib/mysql/mysql-connector-java/5.1.6/mysql-connector-java-5.1.6.jar" />
+	<!-- -configfile D:\eclipse\workspace\Oms\src\main\resources\mybatis-read-content.xml -overwrite -->
+	<context id="bgcontentdbsqlSessionFactory" targetRuntime="MyBatis3">
+
+		<commentGenerator>
+			<property name="suppressDate" value="true" />
+		</commentGenerator>
+
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://192.168.149.52:3306/bgcontentdb" userId="admin"
+			password="admin52">
+		</jdbcConnection>
+
+		<javaTypeResolver type="com.work.shop.util.ByteToTinyIntJavaTypeResolver">
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+
+
+		<javaModelGenerator targetPackage="com.work.shop.bean.bgcontentdb"
+			targetProject="F:\workspace\ChannelService\src\main\java\">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+
+		<!-- xml文件 -->
+		<sqlMapGenerator targetPackage="com.work.shop.dao.bgcontentdb"
+			targetProject="F:\workspace\ChannelService\src\main\resources">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+
+		<javaClientGenerator type="XMLMAPPER" targetPackage="com.work.shop.dao.bgcontentdb"
+			targetProject="F:\workspace\ChannelService\src\main\java\">
+			<property name="enableSubPackages" value="true" />
+		</javaClientGenerator>
+
+		
+<!-- 		<table tableName="product_seller_goods_barcode" domainObjectName="MBProductSellerGoodsBarcode"/> -->
+<!-- 		<table tableName="product_lib_category" domainObjectName="MBProductLibCategory"/> -->
+<!-- 		<table tableName="product_seller_goods_gallery" domainObjectName="MBProductSellerGoodsGallery"/> -->
+<!-- 		<table tableName="product_lib_brand" domainObjectName="MBProductLibBrand"/> -->
+		<!-- <table tableName="product_seller_goods" domainObjectName="MBProductSellerGoods"/> -->
+		<!-- <table tableName="sap_product" domainObjectName="SapProduct"/> -->
+		<!-- <table tableName="sap_prod_cls" domainObjectName="SapProdCls"/> -->
+			<table tableName="product_attr_values" domainObjectName="BGproductAttrValues"/>	
+			<table tableName="product_barcode_list" domainObjectName="BGproductBarcodeList"/>	
+			<table tableName="product_goods" domainObjectName="BGproductGoods"/>	
+			<table tableName="product_goods_gallery" domainObjectName="BGproductGoodsGallery"/>	
+			<table tableName="product_lib_brand" domainObjectName="BGproductLibBrand"/>	
+			<table tableName="product_lib_category" domainObjectName="BGproductLibCategory"/>	
+<!-- 		<table tableName="product_seller_goods_attr" domainObjectName="MBProductSellerGoodsAttr"/> -->
+	</context>
+</generatorConfiguration> 

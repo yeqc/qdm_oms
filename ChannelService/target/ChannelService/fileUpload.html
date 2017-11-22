@@ -1,0 +1,303 @@
+<!DOCTYPE HTML>
+<html>
+ <head>
+  <title> 导入excel数据 </title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<script type="text/javascript" src="js/swfupload/swfupload.js"></script>
+<script type="text/javascript" src="js/swfupload/handlers.js"></script>
+<script type="text/javascript" src="js/jquery/jquery-1.6.2.min.js"></script >
+<style>
+	/** *{margin:0; padding:0; list-style:none;}**/
+	#content{margin:0 auto;padding:0px;}
+	.tit{height:30px;padding-top:8px;}
+	div img{border:0;}
+.btn_green03{
+	padding:0 15px;
+	background-color:#07CD44;
+	/**color:#FFFFFF;**/
+	font-weight:bold;
+	cursor:pointer;
+	margin:17px 30px 0 0;
+	text-indent:0;
+	height:28px;
+	width: 110px;
+	line-height:28px;
+	font-size:13px;
+}
+.float_r{
+	float:left;
+}
+.btn_green03:hover{
+	background-color:#02822B;
+	text-decoration:none; 
+}
+</style>
+<script type="text/javascript">
+	String.prototype.replaceAll = function(reallyDo, replaceWith, ignoreCase) {
+			if (!RegExp.prototype.isPrototypeOf(reallyDo)) {
+			return this.replace(new RegExp(reallyDo, (ignoreCase ? "gi": "g")), replaceWith);
+			} else {
+			return this.replace(reallyDo, replaceWith);
+			}
+		}
+	var uploadLimit = 1;
+	var fileTypes = "*.csv";
+	var href = window.location.href;
+	var paramObj = getURLParam(href);
+	var uploadUrl ="";
+	var type="";
+	var params = {};
+	
+	if (paramObj.fileTypes) {
+		fileTypes = paramObj.fileTypes;
+	}
+	if (paramObj.uploadLimit) {
+		uploadLimit = paramObj.uploadLimit;
+	}
+	if (paramObj.p_id) {
+		p_id = paramObj.p_id;
+	}
+	if (paramObj.uploadUrl) {
+		uploadUrl = paramObj.uploadUrl;
+	}
+	if (paramObj.type) {
+		type = paramObj.type;
+	}
+	
+	//参数格式："key1:value1;key2:value2"
+	if (paramObj.params) {
+		var kvs = paramObj.params.split(";");
+		if(kvs.length > 0){
+			for(var i = 0 ; i < kvs.length ; i++){
+				var kv = kvs[i].split(":");
+				params[kv[0]] = kv[1];
+			}
+		}
+	}
+	var index = "";
+	if (paramObj.index) {
+		index = paramObj.index;
+	}
+	var uPath='';
+	var swfu;
+			window.onload = function () {
+				swfu = new SWFUpload({
+					upload_url: uploadUrl,
+					//upload_url: "/ChannelService/custom/shopGoods/inportChannelGoods.spmvc",
+					post_params: params,
+					// File Upload Settings
+					file_size_limit : "5 MB",	// 1000MB
+					file_types : fileTypes,
+					file_types_description : "所有文件",
+					file_upload_limit : uploadLimit,
+					file_queue_error_handler : fileQueueError,
+					/**file_dialog_complete_handler : function fileDialogComplete(numFilesSelected, numFilesQueued) {
+						try {
+							if (numFilesQueued > 0) {
+								this.startUpload();
+							}
+						} catch (ex) {
+							this.debug(ex);
+						}
+					},**/
+					file_dialog_complete_handler: fileDialogComplete,//选择好文件后直接提交
+					file_queued_handler : fileQueued,
+					upload_progress_handler : uploadProgress,
+					upload_error_handler : uploadError,
+					upload_success_handler :  function uploadSuccess(fileObj, server_data) {
+					try {
+							var obj = eval("("+ server_data + ")");
+							if (obj == null || obj.isok == false) {
+								alert(obj.message);
+								return;
+							}
+							if (type == '1') {
+								parent.doAfter(server_data);
+							}
+							if (type == '2') {
+								parent.ChannelArea.doAfter(server_data);
+							}
+							if(type=='3'){
+								parent.ChannelGoodsInfoPage.doAfter(server_data); //经营商品管理 
+							}
+							if(type=='4'){
+								parent.ChannelGoodsInfoPage2.doAfter(server_data); //经营商品管理 
+							}else {
+								if(obj.totalProperty=="-1") {
+									alert( obj.message);
+									return ;
+								} else if(obj.totalProperty=="-2") {
+									var data;
+									var mes=obj.message;
+									eval("data="+mes); 
+									if(confirm("确定新价低于保护价吗？")){
+										$.ajax({
+											type:"POST",
+											url:"../custom/shopGoodsPrice/inportChannelGoodsPriceCsv.spmvc?path="+data.path+"&ticketCode="+data.ticketCode+"&shopCode="+data.shopCode+"&excetTime="+data.excetTime+"&isTiming="+data.isTiming+"&channelCode="+data.channelCode,
+											success : function(data){
+												parent.TicketInfo.doAfter(data);
+											}
+										});
+									}
+									return;
+								}
+								parent.TicketInfo.doAfter(server_data); //执行回调函数 
+							}
+							closeDiv();
+						} catch (ex) { this.debug(ex); }
+					},
+					upload_complete_handler : uploadComplete,
+	
+					file_post_name: "myfile",
+
+					// Button Settings
+					button_image_url : "",
+					button_placeholder_id : "spanButtonPlaceholder",
+					button_width: 140,
+					button_height: 28,
+					button_text : '<span class="button">选择上传文件</span>',
+					button_text_style : '.button {padding:0 15px;color:#FFFFFF; font-weight:bold;cursor:pointer;margin:5px 10px 0 0;text-indent:0;height:28px;line-height:28px;font-size:13px;}',
+					button_text_top_padding: 6,
+					button_text_left_padding: 10,
+					button_window_mode: SWFUpload.WINDOW_MODE.TRANSPARENT,
+					button_cursor: SWFUpload.CURSOR.HAND,
+					
+					// Flash Settings
+					flash_url : "js/swfupload/swfupload.swf",
+					custom_settings : {
+						upload_target : "divFileProgressContainer"
+					},
+					// Debug Settings
+					debug: false  //是否显示调试窗口
+				});
+			};
+			function startUploadFile(){
+				if (type == '2') {
+					var checkCode =$("#channel_sel").find("option:selected").val();
+					if (checkCode == '') {
+						alert('请先选择渠道！');
+						return ;
+					}
+					params['channelCode'] = checkCode;
+					swfu.setPostParams(params);
+				}
+				swfu.startUpload();
+			}
+
+			/**
+			 * 获取URL中参数
+			 * 
+			 * @param href
+			 * @returns
+			 */
+			 function getURLParam(href) {
+				var retval = {};
+				if (href && -1 == href.indexOf("?")) {
+					href = "?" + href;
+				}
+				if (href && href.length > 0) {
+					var args = href.split("?");
+					// 含有参数
+					if (args[0] !== href) {
+						var params = args[1];
+						args = params.split("&");
+						if (args[0].length > 0) {
+							for (var index = 0; index < args.length; index++) {
+								var param = args[index].split("=");
+								if (param.length > 1) {
+									var name = param[0];
+									retval[name] = param[1];
+								}
+							}
+						}
+					}
+				}
+				
+				return retval;
+			}
+
+			//上传附件添加至上传队列错误提示
+			function fileQueueError(file, errorCode, message) {
+				try {
+					var imageName = "<font color='red'>文件上传错误</font>";
+					var errorName = "";
+					if (errorCode === SWFUpload.QUEUE_ERROR.QUEUE_LIMIT_EXCEEDED) {
+						alert("上传文件最大数为[ "+uploadLimit+" ]");
+						return;
+					}
+					if (errorCode === SWFUpload.errorCode_QUEUE_LIMIT_EXCEEDED) {
+						errorName = "You have attempted to queue too many files.";
+					}
+					if (errorName !== "") {
+						alert(errorName);
+						return;
+					}
+					
+					switch (errorCode) {
+					case SWFUpload.QUEUE_ERROR.ZERO_BYTE_FILE:
+						alert("文件大小为0");
+						break;
+					case SWFUpload.QUEUE_ERROR.FILE_EXCEEDS_SIZE_LIMIT:
+						alert("文件大小超过限制");
+						break;
+					case SWFUpload.QUEUE_ERROR.ZERO_BYTE_FILE:
+					case SWFUpload.QUEUE_ERROR.INVALID_FILETYPE:
+					default:
+						alert(message+'555555555');
+						break;
+					}
+					//addReadyFileInfo(file.id,file.name,imageName,"无法上传");
+				} catch (ex) {
+					this.debug(ex);
+				}
+			}
+	function closeDiv(){
+		parent.FormEditWin.close();
+	}
+</script>
+
+</head>
+<BODY>
+	<div style="float: left; margin: 10 0 0 40;">
+		<div style="float: left;margin-top: 8px;font-size:13px;">上传xls文件:</div>
+		<div style="float: left;margin-top: 5px;">&nbsp;&nbsp;</div>
+		<div id="content" class="btn_green03 float_r">
+			<form enctype="multipart/form-data">
+				<span id="spanButtonPlaceholder"></span>
+				<script type="text/javascript">
+					if (type == '5') {
+						document.write('<select id="channel_sel" style="width: 150px; margin-top: 10px;"></select>');
+					}
+				</script>
+				<input id="btnUpload" type="button" value="上  传" onclick="startUploadFile();self.close();" class="btn3_mouseout" />
+			</form>
+		</div>
+		<div style="float: left;margin-top: 5px;">&nbsp;&nbsp;</div>
+		<div id="uploadFileName" style="float: left;margin-top: 8px;font-size:13px;"></div>
+	</div>
+	<br />
+	<br />
+	<div id="divFileProgressContainer" style="clear: left; margin-top: 50px;font-size:13px;"></div>
+</BODY>
+<script type="text/javascript">
+	if (type == '2') {
+		$.ajax({
+			url: '../custom/channelInfo/channelList.spmvc',
+			type: 'POST',
+			contentType: 'application/x-www-form-urlencoded',
+			dataType: 'json',
+			success: function (date) {
+				if (date.length > 0) {
+					$("#channel_sel").append("<option value=''>-- 请选择渠道 --</option>");
+					$(date).each(function(i,obj) {
+						$("#channel_sel").append("<option value='"+obj.chanelCode+"'>"+obj.channelTitle+"</option>");
+					})
+				}
+			},
+			error: function (request, error, ex) {
+				alert(error);
+			}
+		})
+	}
+</script>
+</HTML>

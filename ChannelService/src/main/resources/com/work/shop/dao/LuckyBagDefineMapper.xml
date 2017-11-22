@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.work.shop.dao.LuckyBagDefineMapper">
+  <resultMap id="LuckyBagDefineMap" type="com.work.shop.bean.LuckyBagGoodsRelationDetailBean">
+  	<id column="id" jdbcType="INTEGER" property="id" />
+  	<result column="lucky_bag_sku" property="luckyBagSku" jdbcType="VARCHAR" />
+    <result column="subset_code" property="subsetCode" jdbcType="VARCHAR" />
+    <result column="sku" property="sku" jdbcType="VARCHAR" />
+  	<result column="warehouse_id" property="warehouseId" jdbcType="VARCHAR" />
+    <result column="goods_name" property="goodsName" jdbcType="VARCHAR" />
+    <result column="goods_price" property="goodsPrice" jdbcType="DECIMAL" />
+    <result column="pre_stock_number" property="preStockNumber" jdbcType="INTEGER" />
+    <result column="act_stock_number" property="actStockNumber" jdbcType="INTEGER" />
+  </resultMap>
+  
+  <select id="getLuckyBagGoodsListByParams" parameterType="java.util.HashMap" resultMap="LuckyBagDefineMap">
+    	SELECT 
+		  t.id,
+		  t.lucky_bag_sku,
+		  t.subset_code,
+		  t.sku,
+		  s.warehouse_id,
+		  s.goods_name,
+		  s.goods_price,
+		  s.pre_stock_number,
+		  s.act_stock_number 
+		FROM lucky_bag_goods_relation t 
+		LEFT JOIN lucky_bag_goods s 
+		    	ON t.sku = s.sku 
+		<where>
+    		<if test="warehouseId!=null and warehouseId!=''">
+    			and s.warehouse_id = #{warehouseId}
+    		</if>
+    		<if test="luckyBagSku!=null and luckyBagSku!=''">
+    			and t.lucky_bag_sku = #{luckyBagSku}
+    		</if>
+    		<if test="subsetCode!=null and subsetCode!=''">
+    			and t.subset_code = #{subsetCode}
+    		</if>
+    	</where> 
+    	<if test="start!=null and limit!=null ">
+    		limit #{start},#{limit}
+    	</if>
+    	/* maxscale route to master */;
+    </select>
+  
+  	<select id="countLuckyBagGoodsListByParams" parameterType="java.util.HashMap" resultType="java.lang.Integer">
+    	SELECT count(*) AS totalProperty 
+		FROM lucky_bag_goods_relation t 
+		LEFT JOIN lucky_bag_goods s 
+		    	ON t.sku = s.sku 
+		<where>
+    		<if test="warehouseId!=null and warehouseId!=''">
+    			and s.warehouse_id = #{warehouseId}
+    		</if>
+    		<if test="luckyBagSku!=null and luckyBagSku!=''">
+    			and t.lucky_bag_sku = #{luckyBagSku}
+    		</if>
+    		<if test="subsetCode!=null and subsetCode!=''">
+    			and t.subset_code = #{subsetCode}
+    		</if>
+    	</where> 
+    	/* maxscale route to master */;
+    </select>
+    
+    <select id="getLuckyBagGoodsListByLuckyBagSku" parameterType="java.util.HashMap" resultMap="LuckyBagDefineMap">
+    	SELECT 
+		  t.id,
+		  t.lucky_bag_sku,
+		  t.subset_code,
+		  t.sku,
+		  s.warehouse_id,
+		  s.goods_name,
+		  s.goods_price,
+		  s.pre_stock_number,
+		  s.act_stock_number 
+		FROM lucky_bag_goods_relation t 
+		LEFT JOIN lucky_bag_goods s 
+		    	ON t.sku = s.sku 
+		<where>
+    		<if test="luckyBagSku!=null and luckyBagSku!=''">
+    			and t.lucky_bag_sku = #{luckyBagSku}
+    		</if>
+    	</where> 
+    	/* maxscale route to master */;
+    </select>
+  
+</mapper>

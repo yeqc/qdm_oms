@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.tony.dubbo:dubbo-json-protocol:0.0.4.1-json">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/tony/dubbo/dubbo-json-protocol/0.0.4.1-json/dubbo-json-protocol-0.0.4.1-json.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/com/tony/dubbo/dubbo-json-protocol/0.0.4.1-json/dubbo-json-protocol-0.0.4.1-json-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/tony/dubbo/dubbo-json-protocol/0.0.4.1-json/dubbo-json-protocol-0.0.4.1-json-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

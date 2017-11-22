@@ -1,0 +1,128 @@
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box; }
+
+body, html, p, h1, h2, h3, h4, h5, h6 {
+  font-family: "Lato", "Helvetica", serif;
+  font-weight: normal; }
+
+code {
+  font-family: "Consolas", "Monaco", monospace;
+  font-weight: normal; }
+
+body, html, p, code {
+  color: #888888; }
+
+h1, h2, h3, h4, h5, h6 {
+  color: #444444; }
+
+pre {
+  overflow: scroll;
+  background: #eeeeee;
+  padding: 1px; }
+
+.content {
+  width: 753px;
+  margin: 0;
+  height: 500px;
+  overflow:auto;
+  float: right;
+  clear: right;
+  border:1px #99bbe8 solid;
+  padding:5px 0 0 5px;
+  border-radius:3px;
+  box-shadow:0px 0px 2px #fff;
+  }
+
+.formats .format {
+  display: inline-block; }
+
+.fork {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border: 0; }
+
+.button {
+  /**display: block;**/
+  padding: 8px;
+  width: 100px;
+  color: black;
+  background: #fff;
+  margin: 6px 6px 0 0;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 4px;
+  border:1px #ddd solid;
+  cursor:pointer
+}
+
+pre .support.tag {
+  color: #000088; }
+pre .support.attribute {
+  color: #880000; }
+pre .string.value {
+  color: #008800; }
+
+.example {
+  position: relative; 
+  }
+    .example .brick .editTemplate {
+      display: block;
+      color: black;
+      background: rgba(255, 255, 0, 0.3);
+      width: 50px;
+      height: 18px;
+      top: 0;
+      right: 50px;
+      position: absolute;
+      text-align: center;
+      line-height: 20px;
+      font-size£ºsmall;
+    }
+    .example .brick .delTemplate {
+      display: block;
+      color: black;
+      background: rgba(255, 255, 0, 0.3);
+      width: 50px;
+      height: 18px;
+      top: 0;
+      right: 0;
+      position: absolute;
+      text-align: center;
+      line-height: 20px;
+      font-size£ºsmall;
+    }
+    /**
+    .example .brick.small {
+      width: 430px;
+      height: 300px; }
+
+    .example .brick.large {
+      width: 890px;
+      height: 300px; }
+    **/
+
+	.tempArea {
+		border:0px;
+		width: 710px;
+		BORDER-BOTTOM: 0px solid;
+		BORDER-LEFT:   0px   solid;
+		BORDER-RIGHT:   0px   solid;
+		BORDER-TOP:   0px   solid;
+		overflow-y:hidden;
+		overflow-x:hidden;
+		height: 150px;
+	}
+	.tempSmallArea {
+		border:0px;
+		width: 350px;
+		BORDER-BOTTOM: 0px solid;
+		BORDER-LEFT:   0px   solid;
+		BORDER-RIGHT:   0px   solid;
+		BORDER-TOP:   0px   solid;
+		overflow-y:hidden;
+		overflow-x:hidden;
+		height: 150px;
+	}

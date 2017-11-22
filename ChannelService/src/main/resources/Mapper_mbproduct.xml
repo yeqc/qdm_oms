@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	   http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+	<bean id="mBProductSellerGoodsBarcodeMapper" class="com.work.shop.spring.mapper.MapperFactoryBeanInvocation">
+		<property name="mapperInterface" value="com.work.shop.dao.mbproduct.MBProductSellerGoodsBarcodeMapper" />
+		<property name="sqlSessionFactory" ref="mbProductsqlSessionFactory" />
+	</bean>
+	<bean id="mBProductLibCategoryMapper" class="com.work.shop.spring.mapper.MapperFactoryBeanInvocation">
+		<property name="mapperInterface" value="com.work.shop.dao.mbproduct.MBProductLibCategoryMapper" />
+		<property name="sqlSessionFactory" ref="mbProductsqlSessionFactory" />
+	</bean>
+	<bean id="mBProductSellerGoodsGalleryMapper" class="com.work.shop.spring.mapper.MapperFactoryBeanInvocation">
+		<property name="mapperInterface" value="com.work.shop.dao.mbproduct.MBProductSellerGoodsGalleryMapper" />
+		<property name="sqlSessionFactory" ref="mbProductsqlSessionFactory" />
+	</bean>
+	<bean id="mBProductLibBrandMapper" class="com.work.shop.spring.mapper.MapperFactoryBeanInvocation">
+		<property name="mapperInterface" value="com.work.shop.dao.mbproduct.MBProductLibBrandMapper" />
+		<property name="sqlSessionFactory" ref="mbProductsqlSessionFactory" />
+	</bean>
+	<bean id="mBProductSellerGoodsMapper" class="com.work.shop.spring.mapper.MapperFactoryBeanInvocation">
+		<property name="mapperInterface" value="com.work.shop.dao.mbproduct.MBProductSellerGoodsMapper" />
+		<property name="sqlSessionFactory" ref="mbProductsqlSessionFactory" />
+	</bean>
+	<bean id="mBProductSellerGoodsAttrMapper" class="com.work.shop.spring.mapper.MapperFactoryBeanInvocation">
+		<property name="mapperInterface" value="com.work.shop.dao.mbproduct.MBProductSellerGoodsAttrMapper" />
+		<property name="sqlSessionFactory" ref="mbProductsqlSessionFactory" />
+	</bean>
+		<bean id="mBProductAttrSelectMapper" class="com.work.shop.spring.mapper.MapperFactoryBeanInvocation">
+		<property name="mapperInterface" value="com.work.shop.dao.mbproduct.MBProductAttrSelectMapper" />
+		<property name="sqlSessionFactory" ref="mbProductsqlSessionFactory" />
+	</bean>
+	<bean id="mBProductSellerGoodsSelectMapper" class="com.work.shop.spring.mapper.MapperFactoryBeanInvocation">
+		<property name="mapperInterface" value="com.work.shop.dao.mbproduct.MBProductSellerGoodsSelectMapper" />
+		<property name="sqlSessionFactory" ref="mbProductsqlSessionFactory" />
+	</bean>
+	
+	<bean id="sapProdClsMapper" class="com.work.shop.spring.mapper.MapperFactoryBeanInvocation">
+		<property name="mapperInterface" value="com.work.shop.dao.mbproduct.SapProdClsMapper" />
+		<property name="sqlSessionFactory" ref="mbProductsqlSessionFactory" />
+	</bean>
+	
+	<bean id="sapProductMapper" class="com.work.shop.spring.mapper.MapperFactoryBeanInvocation">
+		<property name="mapperInterface" value="com.work.shop.dao.mbproduct.SapProductMapper" />
+		<property name="sqlSessionFactory" ref="mbProductsqlSessionFactory" />
+	</bean>
+	
+	<bean id="productLibAttrValueMapper" class="com.work.shop.spring.mapper.MapperFactoryBeanInvocation">
+		<property name="mapperInterface" value="com.work.shop.dao.mbproduct.ProductLibAttrValueMapper" />
+		<property name="sqlSessionFactory" ref="mbProductsqlSessionFactory" />
+	</bean>
+	<!-- 渠道店铺商品表 -->
+	<bean id="productSellerGoodsBarcodeMapper" class="com.work.shop.spring.mapper.MapperFactoryBeanInvocation">
+		<property name="mapperInterface" value="com.work.shop.dao.mbproduct.ProductSellerGoodsBarcodeMapper" />
+		<property name="sqlSessionFactory" ref="mbProductsqlSessionFactory" />
+	</bean>
+	<bean id="productSellerGoodsMapper" class="com.work.shop.spring.mapper.MapperFactoryBeanInvocation">
+		<property name="mapperInterface" value="com.work.shop.dao.mbproduct.ProductSellerGoodsMapper" />
+		<property name="sqlSessionFactory" ref="mbProductsqlSessionFactory" />
+	</bean>
+	<bean id="productChannelGoodsMapper" class="com.work.shop.spring.mapper.MapperFactoryBeanInvocation">
+		<property name="mapperInterface" value="com.work.shop.dao.mbproduct.ProductChannelGoodsMapper" />
+		<property name="sqlSessionFactory" ref="mbProductsqlSessionFactory" />
+	</bean>
+	<bean id="productChannelGoodsBarcodeMapper" class="com.work.shop.spring.mapper.MapperFactoryBeanInvocation">
+		<property name="mapperInterface" value="com.work.shop.dao.mbproduct.ProductChannelGoodsBarcodeMapper" />
+		<property name="sqlSessionFactory" ref="mbProductsqlSessionFactory" />
+	</bean>
+	<bean id="productChannelGoodsPriceMapper" class="com.work.shop.spring.mapper.MapperFactoryBeanInvocation">
+		<property name="mapperInterface" value="com.work.shop.dao.mbproduct.ProductChannelGoodsPriceMapper" />
+		<property name="sqlSessionFactory" ref="mbProductsqlSessionFactory" />
+	</bean>
+	<bean id="productChannelGoodsDetailMapper" class="com.work.shop.spring.mapper.MapperFactoryBeanInvocation">
+		<property name="mapperInterface" value="com.work.shop.dao.mbproduct.ProductChannelGoodsDetailMapper" />
+		<property name="sqlSessionFactory" ref="mbProductsqlSessionFactory" />
+	</bean>
+</beans>

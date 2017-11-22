@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.work.shop.dao.BgChannelDbTableMapper">
+  <resultMap id="TicketInfoVoMap" type="com.work.shop.vo.TicketInfoVo">
+    <id column="Id" jdbcType="INTEGER" property="id" />
+    <result column="ticket_code" jdbcType="VARCHAR" property="ticketCode" />
+    <result column="goods_sn" jdbcType="VARCHAR" property="goodsSn" />
+    <result column="channel_goodssn" jdbcType="VARCHAR" property="channelGoodssn" />
+    <result column="goods_title" jdbcType="VARCHAR" property="goodsTitle" />
+    <result column="is_sync_stock" jdbcType="VARCHAR" property="isSyncStock" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="url_words" jdbcType="VARCHAR" property="urlWords" />
+    <result column="is_online_offline" jdbcType="TINYINT" property="isOnlineOffline" />
+    <result column="channel_code" property="channelCode" jdbcType="VARCHAR" />
+    <result column="shop_code" property="shopCode" jdbcType="VARCHAR" />
+    <result column="ticket_type" property="ticketType" jdbcType="TINYINT" />
+    <result column="on_sell_status" property="onSellStatus" jdbcType="VARCHAR" />
+    <result column="safe_price" jdbcType="DECIMAL" property="safePrice" />
+    <result column="new_price" jdbcType="DECIMAL" property="newPrice" />
+    <result column="selling_info" jdbcType="VARCHAR" property="sellingInfo" />
+    <result column="has_discount" jdbcType="VARCHAR" property="hasDiscount" />
+    <result column="freight_payer" jdbcType="VARCHAR" property="freightPayer" />
+    <result column="return_Message" jdbcType="VARCHAR" property="returnMessage" />
+    <result column="request_time" jdbcType="TIMESTAMP" property="requestTime" />
+  </resultMap>
+  <select id="selectTicketResult" parameterType="hashmap" resultMap="TicketInfoVoMap">
+	SELECT
+		ti.*,
+		cal.return_Message,
+		cal.request_time
+	FROM
+		(
+			SELECT
+				id,
+				on_sell_status,
+				ticket_code,
+				safe_price,
+				new_price,
+				selling_info,
+				goods_sn,
+				channel_goodssn,
+				goods_title,
+				has_discount,
+				is_sync_stock,
+				url_words,
+				url,
+				is_online_offline,
+				freight_payer
+			FROM
+				ticket_info
+			WHERE
+				ticket_code = #{ticketCode, jdbcType=VARCHAR}
+			ORDER BY goods_sn ASC
+		) ti
+	LEFT JOIN (
+		SELECT
+			return_Message,
+			param_info,
+			request_time
+		FROM
+			channel_api_log
+		WHERE
+			param_info like #{ticketCodeLike,jdbcType=VARCHAR}
+	) cal ON CONCAT(ti.ticket_code, '-',ti.goods_sn) = cal.param_info
+  </select>
+  <resultMap id="ChannelShopMap" type="com.work.shop.bean.ChannelShop">
+    <id column="Id" property="id" jdbcType="INTEGER" />
+    <result column="shop_code" property="shopCode" jdbcType="VARCHAR" />
+    <result column="shop_title" property="shopTitle" jdbcType="VARCHAR" />
+    <result column="channel_code" property="channelCode" jdbcType="VARCHAR" />
+    <result column="shop_status" property="shopStatus" jdbcType="TINYINT" />
+    <result column="erp_shop_code" property="erpShopCode" jdbcType="VARCHAR" />
+    <result column="backup" property="backup" jdbcType="VARCHAR" />
+    <result column="shop_channel" property="shopChannel" jdbcType="TINYINT" />
+    <result column="market_title" property="marketTitle" jdbcType="VARCHAR" />
+    <result column="shop_type" property="shopType" jdbcType="VARCHAR" />
+    <result column="shop_address" property="shopAddress" jdbcType="VARCHAR" />
+    <result column="shop_tel" property="shopTel" jdbcType="VARCHAR" />
+    <result column="logistics_callback" property="logisticsCallback" jdbcType="VARCHAR" />
+    <result column="shop_authentication" property="shopAuthentication" jdbcType="VARCHAR" />
+     <result column="shop_img" property="shopImg" jdbcType="VARCHAR" />
+     <result column="parent_shop_code" jdbcType="VARCHAR" property="parentShopCode" />
+     <result column="shop_linkman" jdbcType="VARCHAR" property="shopLinkman" />
+      <result column="expires_Time" jdbcType="TIMESTAMP" property="expiresTime" />
+     
+  </resultMap>
+  <select id="selectOnlineOnsaleChannelShop" resultMap="ChannelShopMap">
+	SELECT
+	cs.*
+	FROM
+		channel_shop cs,
+		channel_info ci
+	WHERE
+		ci.chanel_code = cs.channel_code
+	AND cs.shop_status = 1
+	AND ci.channel_type IN (1, 2)
+	<if test="isSyn != null" >
+		AND cs.is_syn = #{isSyn, jdbcType=INTEGER}
+	</if>
+	AND cs.parent_shop_code = cs.shop_code
+	<!-- AND (
+		shop_code = 'HQ01S999'
+		OR parent_shop_code != 'HQ01S999'
+	) -->
+	ORDER BY
+		ci.chanel_code,
+		cs.shop_code
+  </select>
+  
+  <delete id="deleteByPrimaryKeys" parameterType="java.util.Map" >
+	delete from system_area where Id in (
+		<foreach item="item" index="index" collection="idArr" separator=",">
+			#{item,jdbcType=VARCHAR}
+		</foreach>
+	)
+  </delete>
+  <resultMap id="PromotionsLimitMoneyVOMap" type="com.work.shop.vo.PromotionsLimitMoneyVO">
+    <result column="Id" jdbcType="INTEGER" property="id" />
+    <result column="prom_code" jdbcType="VARCHAR" property="promCode" />
+    <result column="prom_details_code" jdbcType="VARCHAR" property="promDetailsCode" />
+    <result column="limit_money" jdbcType="DECIMAL" property="limitMoney" />
+    <result column="gifts_goods_count" jdbcType="INTEGER" property="giftsGoodsCount" />
+    <result column="gifts_sku_Sn" jdbcType="VARCHAR" property="giftsSkuSn" />
+    <result column="gifts_sku_count" jdbcType="INTEGER" property="giftsSkuCount" />
+    <result column="gifts_priority" jdbcType="TINYINT" property="giftsPriority" />
+  </resultMap>
+  <select id="selectPromotionsLimitMoneyGoods" resultMap="PromotionsLimitMoneyVOMap" parameterType="string">
+	SELECT
+		plm.Id,
+		plm.prom_code,
+		plm.prom_details_code,
+		plm.gifts_goods_count,
+		plm.limit_money,
+		plmg.gifts_sku_Sn,
+		plmg.gifts_sku_count,
+		plmg.gifts_priority
+	FROM
+		promotions_limit_money plm,
+		promotions_limit_money_goods plmg
+	WHERE
+		plm.prom_code = plmg.prom_code
+	AND plm.prom_details_code = plmg.prom_details_code
+	AND plm.prom_code = #{promCode, jdbcType=VARCHAR}
+  </select>
+  
+    <select id="selectAllSynStockChannelShop" resultMap="PromotionsLimitMoneyVOMap" parameterType="string">
+	SELECT
+		plm.Id,
+		plm.prom_code,
+		plm.prom_details_code,
+		plm.gifts_goods_count,
+		plm.limit_money,
+		plmg.gifts_sku_Sn,
+		plmg.gifts_sku_count,
+		plmg.gifts_priority
+	FROM
+		promotions_limit_money plm,
+		promotions_limit_money_goods plmg
+	WHERE
+		plm.prom_code = plmg.prom_code
+	AND plm.prom_details_code = plmg.prom_details_code
+	AND plm.prom_code = #{promCode, jdbcType=VARCHAR}
+  </select>
+  
+  
+</mapper>

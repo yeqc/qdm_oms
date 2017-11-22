@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE generatorConfiguration  
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"  
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+	<classPathEntry
+			location="D:\work\apache-maven-3.0.3\apache-maven-3.0.3\mavenlib\mysql\mysql-connector-java\5.1.6" />
+	<!-- -configfile D:\eclipse\workspace\Oms\src\main\resources\mybatis-read-content.xml -overwrite -->
+	<context id="bgcontentdbsqlSessionFactory" targetRuntime="MyBatis3">
+
+		<commentGenerator>
+			<property name="suppressDate" value="true" />
+		</commentGenerator>
+
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://192.168.149.52:3306/bgcontentdb" userId="admin"
+			password="admin52">
+		</jdbcConnection>
+
+		<javaTypeResolver type="com.work.shop.util.ByteToTinyIntJavaTypeResolver">
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+
+
+		<javaModelGenerator targetPackage="com.work.shop.bean.contentDB"
+			targetProject="D:\eclipse\workspace\ChannelService\src\main\java\">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+
+		<!-- xml文件 -->
+		<sqlMapGenerator targetPackage="com.work.shop.dao.contentDB"
+			targetProject="D:\eclipse\workspace\ChannelService\src\main\resources">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+
+		<javaClientGenerator type="XMLMAPPER" targetPackage="com.work.shop.dao.contentDB"
+			targetProject="D:\eclipse\workspace\ChannelService\src\main\java\">
+			<property name="enableSubPackages" value="true" />
+		</javaClientGenerator>
+
+		
+		<table tableName="product_goods" domainObjectName="OSProductGoods"/>
+		<table tableName="product_barcode_list" domainObjectName="OSProductBarcodeList"/>
+		<table tableName="product_goods_gallery" domainObjectName="OSProductGoodsGallery"/>
+		<table tableName="product_lib_brand" domainObjectName="OSProductLibBrand"/>
+		<table tableName="product_lib_category" domainObjectName="OSProductLibCategory"/>
+		<table tableName="product_attr_values" domainObjectName="OSProductAttrValues"/>
+	</context>
+</generatorConfiguration> 

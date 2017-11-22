@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+	<bean id="proOmsProducer" class="com.aliyun.openservices.ons.api.bean.ProducerBean"
+		init-method="start" destroy-method="shutdown">
+		<property name="properties">
+			<map>
+				<entry key="ProducerId" value="PID_${topic_regionId}_${topic_pid}" /> <!-- PID,请替换 -->
+				<entry key="AccessKey">
+					<value>${accessKey}</value>
+				</entry> <!-- ACCESS_KEY,请替换 -->
+				<entry key="SecretKey">
+					<value>${secretKey}</value>
+				</entry><!-- SECRET_KEY,请替换 -->
+				<!-- PropertyKeyConst.ONSAddr 请根据不同Region进行配置 -->
+				<entry key="ONSAddr">
+					<value>${ONSAddr}</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	
+	<bean id="onsProducerService" class="com.work.shop.mq.aliyun.producer.AliyunOnsProducerServiceImpl" singleton="false" />
+	
+	<bean id="dynamicListenerAliyunManager" class="com.work.shop.oms.aliyunons.listener.DynamicListenerAliyunManager" />
+</beans>

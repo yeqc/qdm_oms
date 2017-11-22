@@ -1,0 +1,1 @@
+01:03:04.678,[org.apache.zookeeper.ClientCnxnSocket,org.apache.zookeeper.ClientCnxnSocket.readConnectResult(ClientCnxnSocket.java:139)] Connected to an old server; r-o mode will be unavailable

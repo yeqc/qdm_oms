@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	   http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+	<bean id="channelGoodsMapper" class="com.work.shop.spring.mapper.MapperFactoryBeanInvocation">
+		<property name="mapperInterface" value="com.work.shop.dao.ChannelGoodsMapper" />
+		<property name="sqlSessionFactory" ref="openshopsqlSessionFactory" />
+	</bean>
+	<bean id="goodsPropertyMapper" class="com.work.shop.spring.mapper.MapperFactoryBeanInvocation">
+		<property name="mapperInterface" value="com.work.shop.dao.GoodsPropertyMapper" />
+		<property name="sqlSessionFactory" ref="openshopsqlSessionFactory" />
+	</bean>
+	<bean id="productGoodsGalleryMapper" class="com.work.shop.spring.mapper.MapperFactoryBeanInvocation">
+		<property name="mapperInterface" value="com.work.shop.dao.ProductGoodsGalleryMapper" />
+		<property name="sqlSessionFactory" ref="openshopsqlSessionFactory" />
+	</bean>
+	<bean id="channelGoodsExtensionMapper" class="com.work.shop.spring.mapper.MapperFactoryBeanInvocation">
+		<property name="mapperInterface" value="com.work.shop.dao.ChannelGoodsExtensionMapper" />
+		<property name="sqlSessionFactory" ref="openshopsqlSessionFactory" />
+	</bean>
+	
+	<bean id="productGoodsMapper" class="com.work.shop.spring.mapper.MapperFactoryBeanInvocation">
+		<property name="mapperInterface" value="com.work.shop.dao.ProductGoodsMapper" />
+		<property name="sqlSessionFactory" ref="openshopsqlSessionFactory" />
+	</bean>
+	
+	<bean id="productBarcodeListMapper" class="com.work.shop.spring.mapper.MapperFactoryBeanInvocation">
+		<property name="mapperInterface" value="com.work.shop.dao.ProductBarcodeListMapper" />
+		<property name="sqlSessionFactory" ref="openshopsqlSessionFactory" />
+	</bean>
+	<bean id="productAttrValuesMapper" class="com.work.shop.spring.mapper.MapperFactoryBeanInvocation">
+		<property name="mapperInterface" value="com.work.shop.dao.ProductAttrValuesMapper" />
+		<property name="sqlSessionFactory" ref="openshopsqlSessionFactory" />
+	</bean>
+	<bean id="systemRegionMapper" class="com.work.shop.spring.mapper.MapperFactoryBeanInvocation">
+		<property name="mapperInterface" value="com.work.shop.dao.SystemRegionMapper" />
+		<property name="sqlSessionFactory" ref="openshopsqlSessionFactory" />
+	</bean>
+    <bean id="productLibBrandMapper" class="com.work.shop.spring.mapper.MapperFactoryBeanInvocation">
+		<property name="mapperInterface" value="com.work.shop.dao.ProductLibBrandMapper" />
+		<property name="sqlSessionFactory" ref="openshopsqlSessionFactory" />
+	</bean>
+	<bean id="productLibCategoryMapper" class="com.work.shop.spring.mapper.MapperFactoryBeanInvocation">
+		<property name="mapperInterface" value="com.work.shop.dao.ProductLibCategoryMapper" />
+		<property name="sqlSessionFactory" ref="openshopsqlSessionFactory" />
+	</bean>
+
+</beans>

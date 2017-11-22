@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	   http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+	<bean id="channelInfoMapper" class="com.work.shop.spring.mapper.MapperFactoryBeanInvocation">
+		<property name="mapperInterface" value="com.work.shop.dao.ChannelInfoMapper" />
+		<property name="sqlSessionFactory" ref="bgchanneldbsqlSessionFactory" />
+	</bean>
+	<bean id="channelShopMapper" class="com.work.shop.spring.mapper.MapperFactoryBeanInvocation">
+		<property name="mapperInterface" value="com.work.shop.dao.ChannelShopMapper" />
+		<property name="sqlSessionFactory" ref="bgchanneldbsqlSessionFactory" />
+	</bean>
+	<bean id="giftsGoodsListMapper" class="com.work.shop.spring.mapper.MapperFactoryBeanInvocation">
+		<property name="mapperInterface" value="com.work.shop.dao.GiftsGoodsListMapper" />
+		<property name="sqlSessionFactory" ref="bgchanneldbsqlSessionFactory" />
+	</bean>
+	<bean id="groupGoodsListMapper" class="com.work.shop.spring.mapper.MapperFactoryBeanInvocation">
+		<property name="mapperInterface" value="com.work.shop.dao.GroupGoodsListMapper" />
+		<property name="sqlSessionFactory" ref="bgchanneldbsqlSessionFactory" />
+	</bean>
+	<bean id="interfacePropertiesMapper" class="com.work.shop.spring.mapper.MapperFactoryBeanInvocation">
+		<property name="mapperInterface" value="com.work.shop.dao.InterfacePropertiesMapper" />
+		<property name="sqlSessionFactory" ref="bgchanneldbsqlSessionFactory" />
+	</bean>
+	<bean id="promotionsInfoMapper" class="com.work.shop.spring.mapper.MapperFactoryBeanInvocation">
+		<property name="mapperInterface" value="com.work.shop.dao.PromotionsInfoMapper" />
+		<property name="sqlSessionFactory" ref="bgchanneldbsqlSessionFactory" />
+	</bean>
+	<bean id="promotionsLimitMoneyMapper" class="com.work.shop.spring.mapper.MapperFactoryBeanInvocation">
+		<property name="mapperInterface" value="com.work.shop.dao.PromotionsLimitMoneyMapper" />
+		<property name="sqlSessionFactory" ref="bgchanneldbsqlSessionFactory" />
+	</bean>
+	<bean id="promotionsLimitSnMapper" class="com.work.shop.spring.mapper.MapperFactoryBeanInvocation">
+		<property name="mapperInterface" value="com.work.shop.dao.PromotionsLimitSnMapper" />
+		<property name="sqlSessionFactory" ref="bgchanneldbsqlSessionFactory" />
+	</bean>
+	<bean id="promotionsLimitGoodsMapper" class="com.work.shop.spring.mapper.MapperFactoryBeanInvocation">
+		<property name="mapperInterface" value="com.work.shop.dao.PromotionsLimitGoodsMapper" />
+		<property name="sqlSessionFactory" ref="bgchanneldbsqlSessionFactory" />
+	</bean>
+	<bean id="systemAreaMapper" class="com.work.shop.spring.mapper.MapperFactoryBeanInvocation">
+		<property name="mapperInterface" value="com.work.shop.dao.SystemAreaMapper" />
+		<property name="sqlSessionFactory" ref="bgchanneldbsqlSessionFactory" />
+	</bean>
+	<bean id="ticketInfoMapper" class="com.work.shop.spring.mapper.MapperFactoryBeanInvocation">
+		<property name="mapperInterface" value="com.work.shop.dao.TicketInfoMapper" />
+		<property name="sqlSessionFactory" ref="bgchanneldbsqlSessionFactory" />
+	</bean>
+	<bean id="channelApiInfoMapper" class="com.work.shop.spring.mapper.MapperFactoryBeanInvocation">
+		<property name="mapperInterface" value="com.work.shop.dao.ChannelApiInfoMapper" />
+		<property name="sqlSessionFactory" ref="bgchanneldbsqlSessionFactory" />
+	</bean>
+	<bean id="channelApiNameMapper" class="com.work.shop.spring.mapper.MapperFactoryBeanInvocation">
+		<property name="mapperInterface" value="com.work.shop.dao.ChannelApiNameMapper" />
+		<property name="sqlSessionFactory" ref="bgchanneldbsqlSessionFactory" />
+	</bean>
+	<bean id="channelGoodsTicketMapper" class="com.work.shop.spring.mapper.MapperFactoryBeanInvocation">
+		<property name="mapperInterface" value="com.work.shop.dao.ChannelGoodsTicketMapper" />
+		<property name="sqlSessionFactory" ref="bgchanneldbsqlSessionFactory" />
+	</bean>
+	<bean id="channelTemplateMapper" class="com.work.shop.spring.mapper.MapperFactoryBeanInvocation">
+		<property name="mapperInterface" value="com.work.shop.dao.ChannelTemplateMapper" />
+		<property name="sqlSessionFactory" ref="bgchanneldbsqlSessionFactory" />
+	</bean>
+	<bean id="channelTemplateContentMapper" class="com.work.shop.spring.mapper.MapperFactoryBeanInvocation">
+		<property name="mapperInterface" value="com.work.shop.dao.ChannelTemplateContentMapper" />
+		<property name="sqlSessionFactory" ref="bgchanneldbsqlSessionFactory" />
+	</bean>
+	<bean id="channelTemplateModuleMapper" class="com.work.shop.spring.mapper.MapperFactoryBeanInvocation">
+		<property name="mapperInterface" value="com.work.shop.dao.ChannelTemplateModuleMapper" />
+		<property name="sqlSessionFactory" ref="bgchanneldbsqlSessionFactory" />
+	</bean>
+	<bean id="promotionsListGoodsMapper" class="com.work.shop.spring.mapper.MapperFactoryBeanInvocation">
+		<property name="mapperInterface" value="com.work.shop.dao.PromotionsListGoodsMapper" />
+		<property name="sqlSessionFactory" ref="bgchanneldbsqlSessionFactory" />
+	</bean>
+	<bean id="promotionsListInforMapper" class="com.work.shop.spring.mapper.MapperFactoryBeanInvocation">
+		<property name="mapperInterface" value="com.work.shop.dao.PromotionsListInforMapper" />
+		<property name="sqlSessionFactory" ref="bgchanneldbsqlSessionFactory" />
+	</bean>
+	<bean id="channelApiLogMapper" class="com.work.shop.spring.mapper.MapperFactoryBeanInvocation">
+		<property name="mapperInterface" value="com.work.shop.dao.ChannelApiLogMapper" />
+		<property name="sqlSessionFactory" ref="bgchanneldbsqlSessionFactory" />
+	</bean>
+	<bean id="groupGoodsMapper" class="com.work.shop.spring.mapper.MapperFactoryBeanInvocation">
+		<property name="mapperInterface" value="com.work.shop.dao.GroupGoodsMapper" />
+		<property name="sqlSessionFactory" ref="bgchanneldbsqlSessionFactory" />
+	</bean>
+	<bean id="channelErpUpdownLogMapper" class="com.work.shop.spring.mapper.MapperFactoryBeanInvocation">
+		<property name="mapperInterface" value="com.work.shop.dao.ChannelErpUpdownLogMapper" />
+		<property name="sqlSessionFactory" ref="bgchanneldbsqlSessionFactory" />
+	</bean>
+	<bean id="systemResourceMapper" class="com.work.shop.spring.mapper.MapperFactoryBeanInvocation">
+		<property name="mapperInterface" value="com.work.shop.dao.SystemResourceMapper" />
+		<property name="sqlSessionFactory" ref="bgchanneldbsqlSessionFactory" />
+	</bean>
+	<bean id="bgChannelDbTableMapper" class="com.work.shop.spring.mapper.MapperFactoryBeanInvocation">
+		<property name="mapperInterface" value="com.work.shop.dao.BgChannelDbTableMapper" />
+		<property name="sqlSessionFactory" ref="bgchanneldbsqlSessionFactory" />
+	</bean>
+	<bean id="promotionsLogMapper" class="com.work.shop.spring.mapper.MapperFactoryBeanInvocation">
+		<property name="mapperInterface" value="com.work.shop.dao.PromotionsLogMapper" />
+		<property name="sqlSessionFactory" ref="bgchanneldbsqlSessionFactory" />
+	</bean>
+	<bean id="channelStockLogMapper" class="com.work.shop.spring.mapper.MapperFactoryBeanInvocation">
+		<property name="mapperInterface" value="com.work.shop.dao.ChannelStockLogMapper" />
+		<property name="sqlSessionFactory" ref="bgchanneldbsqlSessionFactory" />
+	</bean>
+		<bean id="channelStockLogSearchMapper" class="com.work.shop.spring.mapper.MapperFactoryBeanInvocation">
+		<property name="mapperInterface" value="com.work.shop.dao.ChannelStockLogSearchMapper" />
+		<property name="sqlSessionFactory" ref="bgchanneldbsqlSessionFactory" />
+	</bean>
+	<bean id="promotionsLimitMoneyGoodsMapper" class="com.work.shop.spring.mapper.MapperFactoryBeanInvocation">
+		<property name="mapperInterface" value="com.work.shop.dao.PromotionsLimitMoneyGoodsMapper" />
+		<property name="sqlSessionFactory" ref="bgchanneldbsqlSessionFactory" />
+	</bean>
+	<bean id="systemRegionMatchMapper" class="com.work.shop.spring.mapper.MapperFactoryBeanInvocation">
+		<property name="mapperInterface" value="com.work.shop.dao.SystemRegionMatchMapper" />
+		<property name="sqlSessionFactory" ref="bgchanneldbsqlSessionFactory" />
+	</bean>
+	<bean id="channelShopDefineMapper" class="com.work.shop.spring.mapper.MapperFactoryBeanInvocation">
+		<property name="mapperInterface" value="com.work.shop.dao.ChannelShopDefineMapper" />
+		<property name="sqlSessionFactory" ref="bgchanneldbsqlSessionFactory" />
+	</bean>
+	<bean id="taoBaoO2OShopMapper" class="com.work.shop.spring.mapper.MapperFactoryBeanInvocation">
+		<property name="mapperInterface" value="com.work.shop.dao.TaoBaoO2OShopMapper" />
+		<property name="sqlSessionFactory" ref="bgchanneldbsqlSessionFactory" />
+	</bean>
+	
+	<bean id="luckyBagMapper" class="com.work.shop.spring.mapper.MapperFactoryBeanInvocation">
+		<property name="mapperInterface" value="com.work.shop.dao.LuckyBagMapper" />
+		<property name="sqlSessionFactory" ref="bgchanneldbsqlSessionFactory" />
+	</bean>
+	<bean id="luckyBagGoodsMapper" class="com.work.shop.spring.mapper.MapperFactoryBeanInvocation">
+		<property name="mapperInterface" value="com.work.shop.dao.LuckyBagGoodsMapper" />
+		<property name="sqlSessionFactory" ref="bgchanneldbsqlSessionFactory" />
+	</bean>
+	<bean id="luckyBagGoodsRelationMapper" class="com.work.shop.spring.mapper.MapperFactoryBeanInvocation">
+		<property name="mapperInterface" value="com.work.shop.dao.LuckyBagGoodsRelationMapper" />
+		<property name="sqlSessionFactory" ref="bgchanneldbsqlSessionFactory" />
+	</bean>
+	<bean id="luckyBagLogMapper" class="com.work.shop.spring.mapper.MapperFactoryBeanInvocation">
+		<property name="mapperInterface" value="com.work.shop.dao.LuckyBagLogMapper" />
+		<property name="sqlSessionFactory" ref="bgchanneldbsqlSessionFactory" />
+	</bean>
+	<bean id="luckyBagSubsetMapper" class="com.work.shop.spring.mapper.MapperFactoryBeanInvocation">
+		<property name="mapperInterface" value="com.work.shop.dao.LuckyBagSubsetMapper" />
+		<property name="sqlSessionFactory" ref="bgchanneldbsqlSessionFactory" />
+	</bean>
+	<bean id="luckyBagDefineMapper" class="com.work.shop.spring.mapper.MapperFactoryBeanInvocation">
+		<property name="mapperInterface" value="com.work.shop.dao.LuckyBagDefineMapper" />
+		<property name="sqlSessionFactory" ref="bgchanneldbsqlSessionFactory" />
+	</bean>
+	
+</beans>

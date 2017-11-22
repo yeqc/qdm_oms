@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- - Copyright 1999-2011 Alibaba Group. - - Licensed under the Apache License, 
+	Version 2.0 (the "License"); - you may not use this file except in compliance 
+	with the License. - You may obtain a copy of the License at - - http://www.apache.org/licenses/LICENSE-2.0 
+	- - Unless required by applicable law or agreed to in writing, software - 
+	distributed under the License is distributed on an "AS IS" BASIS, - WITHOUT 
+	WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. - See the 
+	License for the specific language governing permissions and - limitations 
+	under the License. -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+	<bean
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location">
+			<value>classpath:resource.properties</value>
+		</property>
+	</bean>
+	<dubbo:application name="channelService" /> 
+
+	<dubbo:registry id="stock-zookeeper" protocol="zookeeper" address="${stockdubbo.registry}" />
+	<dubbo:registry id="bg-zookeeper" protocol="zookeeper" address="${bgdubbo.registry}" />
+	<dubbo:registry id="os-zookeeper" protocol="zookeeper" address="${osdubbo.registry}" />
+	
+	<dubbo:protocol id="taskPrtl" name="dubbo" port="${dubbo.server.port}"/>
+	<dubbo:protocol id="cachePrtl" name="json" port="${dubbo.server.port2}" server="servlet" contextpath="${dubbo.server.context}" threads="1000"/>
+
+	<!-- 商品信息定时同步服务 -->
+	<dubbo:service protocol="taskPrtl" registry="os-zookeeper" group="${task.server.group}"
+		interface="com.work.shop.task.IProductGoodsDataTimerTask"
+		ref="productGoodsDataTimerTask" timeout="200000"/>
+		
+	<!-- 商品信息定时同步bgcontentdb服务 -->
+	<dubbo:service protocol="taskPrtl" registry="os-zookeeper" group="${task.server.group}"
+		interface="com.work.shop.task.BgProductGoodsDataTimerTask"
+		ref="bgProductGoodsDateTimerImpl" timeout="200000"/>
+
+	<!-- Token 更新服务 -->
+	<dubbo:service protocol="taskPrtl" registry="os-zookeeper" group="${task.server.group}"
+		interface="com.work.shop.task.SyncShopsToken" 
+		ref="syncShopsTokenImpl" timeout="200000"/>
+    <!-- Sap更新商品服务 -->
+	<dubbo:service protocol="taskPrtl" registry="os-zookeeper"
+		group="${task.server.group}" interface="com.work.shop.task.SapProductSync"
+		ref="sapProductSyncImpl" timeout="200000" />
+</beans>
